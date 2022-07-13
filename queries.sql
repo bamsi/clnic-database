@@ -40,3 +40,11 @@ select AVG(weight_kg) from animals;
 select MAX(escape_attempts) from animals;
 select species, MIN(weight_kg) as minimum, MAX(weight_kg) as maximum from animals GROUP BY species;
 select species, AVG(escape_attempts) from animals where date_of_birth BETWEEN '1990-1-1' AND '2000-12-31' GROUP BY species;
+
+select a.name from animals as a join owners as o on a.owner_id = o.id WHERE o.full_name = 'Melody Pond';
+select a.name from animals as a join species as s on a.species_id = s.id WHERE s.name = 'Pokemon';
+select o.full_name as owner, a.name as animal from owners as o LEFT OUTER JOIN animals as a on o.id = a.owner_id;
+select s.name, count(a.*) from species as s join animals as a on a.species_id = s.id GROUP BY s.name;
+select a.name from animals as a join owners as o on o.id = a.owner_id join species as s on s.id = a.species_id WHERE s.name = 'Digimon' and o.full_name='Jennifer Orwell';
+select a.name from animals as a join owners as o on o.id = a.owner_id WHERE o.full_name='Dean Winchester' and a.escape_attempts = 0;
+select o.full_name, count(a.*) as ntimes from owners as o join animals as a on a.owner_id = o.id GROUP BY o.full_name ORDER BY ntimes DESC limit 1; 
